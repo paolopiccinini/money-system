@@ -752,7 +752,7 @@
 	"variable": [
 		{
 			"key": "baseUrl",
-			"value": "http://localhost:8090"
+			"value": "http://localhost:8090/api/calculations"
 		},
 		{
 			"key": "acceptHeader",

@@ -16,16 +16,14 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
 
 @Tag(name = "Calculations", description = "Calculations management APIs")
-@RestController("api/calculations")
+@RestController
+@RequestMapping("api/calculations")
 public class CalculatorController {
 
     private final Logger logger;
