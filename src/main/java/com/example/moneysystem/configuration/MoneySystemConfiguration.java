@@ -1,6 +1,7 @@
 package com.example.moneysystem.configuration;
 
 import com.example.moneysystem.constants.Constants;
+import com.example.moneysystem.filter.HeaderFilter;
 import com.example.moneysystem.interceptor.Slf4jMDCInterceptor;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.models.OpenAPI;
@@ -41,24 +42,24 @@ public class MoneySystemConfiguration implements WebMvcConfigurer {
 //        return registrationBean;
 //    }
 
-    @Bean
-    public OpenAPI openAPI() {
-        Server devServer = new Server();
-        devServer.setUrl("http://localhost:8090");
-        devServer.setDescription("Server URL in Development environment");
-
-        Contact contact = new Contact();
-        contact.setEmail("paolo.piccinini88@gmail.com");
-        contact.setName("Paolo Piccinini");
-
-        Info info = new Info()
-                .title("UK money system before 1970 calculation API")
-                .version("1.0")
-                .contact(contact)
-                .description("This API exposes endpoints to do calculations with UK money system before 1970.");
-
-        return new OpenAPI().info(info).servers(List.of(devServer));
-    }
+//    @Bean
+//    public OpenAPI openAPI() {
+//        Server devServer = new Server();
+//        devServer.setUrl("http://localhost:8090");
+//        devServer.setDescription("Server URL in Development environment");
+//
+//        Contact contact = new Contact();
+//        contact.setEmail("paolo.piccinini88@gmail.com");
+//        contact.setName("Paolo Piccinini");
+//
+//        Info info = new Info()
+//                .title("UK money system before 1970 calculation API")
+//                .version("1.0")
+//                .contact(contact)
+//                .description("This API exposes endpoints to do calculations with UK money system before 1970.");
+//
+//        return new OpenAPI().info(info).p.servers(List.of(devServer));
+//    }
 
     // Tryied to override Accept header NOT WORKING
 //    @Bean
@@ -70,6 +71,17 @@ public class MoneySystemConfiguration implements WebMvcConfigurer {
 //            operation.addParametersItem(headerParameter);
 //            return operation;
 //        };
+//    }
+
+
+    //https://github.com/springdoc/springdoc-openapi/issues/449
+    //NOT working there si no way to get the headers in HeaderFilter
+//    @Bean
+//    public GroupedOpenApi groupOpenApi() {
+//        return GroupedOpenApi.builder()
+//                .group("v1").packagesToScan("com.example.moneysystem.controller")
+//                .addOpenApiCustomizer(new HeaderFilter("ciao", Constants.VERSION_1_HEADER))
+//                .build();
 //    }
 
     // to expose /actuator/httpExchange
