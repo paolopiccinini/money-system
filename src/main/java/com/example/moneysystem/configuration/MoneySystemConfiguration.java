@@ -42,24 +42,24 @@ public class MoneySystemConfiguration implements WebMvcConfigurer {
 //        return registrationBean;
 //    }
 
-//    @Bean
-//    public OpenAPI openAPI() {
-//        Server devServer = new Server();
-//        devServer.setUrl("http://localhost:8090");
-//        devServer.setDescription("Server URL in Development environment");
-//
-//        Contact contact = new Contact();
-//        contact.setEmail("paolo.piccinini88@gmail.com");
-//        contact.setName("Paolo Piccinini");
-//
-//        Info info = new Info()
-//                .title("UK money system before 1970 calculation API")
-//                .version("1.0")
-//                .contact(contact)
-//                .description("This API exposes endpoints to do calculations with UK money system before 1970.");
-//
-//        return new OpenAPI().info(info).p.servers(List.of(devServer));
-//    }
+    @Bean
+    public OpenAPI openAPI() {
+        Server devServer = new Server();
+        devServer.setUrl("http://localhost:8090");
+        devServer.setDescription("Server URL in Development environment");
+
+        Contact contact = new Contact();
+        contact.setEmail("paolo.piccinini88@gmail.com");
+        contact.setName("Paolo Piccinini");
+
+        Info info = new Info()
+                .title("UK money system before 1970 calculation API")
+                .version("1.0")
+                .contact(contact)
+                .description("This API exposes endpoints to do calculations with UK money system before 1970.");
+
+        return new OpenAPI().info(info).p.servers(List.of(devServer));
+    }
 
     // Tryied to override Accept header NOT WORKING
 //    @Bean
@@ -75,7 +75,7 @@ public class MoneySystemConfiguration implements WebMvcConfigurer {
 
 
     //https://github.com/springdoc/springdoc-openapi/issues/449
-    //NOT working there si no way to get the headers in HeaderFilter
+    //NOT working there is no way to get the headers in HeaderFilter
 //    @Bean
 //    public GroupedOpenApi groupOpenApi() {
 //        return GroupedOpenApi.builder()
