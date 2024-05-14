@@ -58,7 +58,7 @@ public class MoneySystemConfiguration implements WebMvcConfigurer {
                 .contact(contact)
                 .description("This API exposes endpoints to do calculations with UK money system before 1970.");
 
-        return new OpenAPI().info(info).p.servers(List.of(devServer));
+        return new OpenAPI().info(info).servers(List.of(devServer));
     }
 
     // Tryied to override Accept header NOT WORKING

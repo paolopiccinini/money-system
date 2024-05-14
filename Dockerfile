@@ -13,7 +13,6 @@ RUN ./mvnw package
 FROM openjdk:17-jdk-alpine
 WORKDIR /work/application
 COPY --from=build /code/target/money-system*.jar /work/application/money-system.jar
-RUN chmod +x /work/application/money-system.jar
 
 EXPOSE 8090
 
