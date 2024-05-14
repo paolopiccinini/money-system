@@ -44,6 +44,7 @@ public class CalculatorController {
             @ApiResponse(responseCode = "200", content = { @Content(schema = @Schema(implementation = BaseDto.class), mediaType = Constants.VERSION_1_HEADER) }),
             @ApiResponse(responseCode = "400", content = { @Content(schema = @Schema(implementation = List.class), mediaType = Constants.VERSION_1_HEADER) }),
             @ApiResponse(responseCode = "415", content = { @Content(schema = @Schema(implementation = Map.class), mediaType = Constants.VERSION_1_HEADER) }),
+            @ApiResponse(responseCode = "500", content = { @Content(schema = @Schema(implementation = Map.class), mediaType = Constants.VERSION_1_HEADER) }),
     })
     @PostMapping(value = "/sum", produces = {Constants.VERSION_1_HEADER})
     public BaseDto sumV1(@RequestBody @Valid TwoOperandsBody body) {
@@ -68,6 +69,7 @@ public class CalculatorController {
             @ApiResponse(responseCode = "200", content = { @Content(schema = @Schema(implementation = BaseDto.class), mediaType = Constants.VERSION_1_HEADER) }),
             @ApiResponse(responseCode = "400", content = { @Content(schema = @Schema(implementation = List.class), mediaType = Constants.VERSION_1_HEADER) }),
             @ApiResponse(responseCode = "415", content = { @Content(schema = @Schema(implementation = Map.class), mediaType = Constants.VERSION_1_HEADER) }),
+            @ApiResponse(responseCode = "500", content = { @Content(schema = @Schema(implementation = Map.class), mediaType = Constants.VERSION_1_HEADER) }),
     })
     @PostMapping(value = "/subtract", produces = {Constants.VERSION_1_HEADER})
     public BaseDto subtractV1(@RequestBody @Valid TwoOperandsBody body) {
@@ -90,6 +92,7 @@ public class CalculatorController {
             @ApiResponse(responseCode = "200", content = { @Content(schema = @Schema(implementation = BaseDto.class), mediaType = Constants.VERSION_1_HEADER) }),
             @ApiResponse(responseCode = "400", content = { @Content(schema = @Schema(implementation = List.class), mediaType = Constants.VERSION_1_HEADER) }),
             @ApiResponse(responseCode = "415", content = { @Content(schema = @Schema(implementation = Map.class), mediaType = Constants.VERSION_1_HEADER) }),
+            @ApiResponse(responseCode = "500", content = { @Content(schema = @Schema(implementation = Map.class), mediaType = Constants.VERSION_1_HEADER) }),
     })
     @PostMapping(value = "/multiply", produces = {Constants.VERSION_1_HEADER})
     public BaseDto multiplyV1(@RequestBody
@@ -117,6 +120,7 @@ public class CalculatorController {
             @ApiResponse(responseCode = "200", content = { @Content(schema = @Schema(implementation = BaseDto.class), mediaType = Constants.VERSION_1_HEADER) }),
             @ApiResponse(responseCode = "400", content = { @Content(schema = @Schema(implementation = List.class), mediaType = Constants.VERSION_1_HEADER) }),
             @ApiResponse(responseCode = "415", content = { @Content(schema = @Schema(implementation = Map.class), mediaType = Constants.VERSION_1_HEADER) }),
+            @ApiResponse(responseCode = "500", content = { @Content(schema = @Schema(implementation = Map.class), mediaType = Constants.VERSION_1_HEADER) }),
     })
     @PostMapping(value = "/divide", produces = {Constants.VERSION_1_HEADER})
     public BaseDto divideV1(@RequestBody
