@@ -63,7 +63,7 @@ public class CalculatorControllerTest {
         given(mapper.toString(eq(result))).willReturn("9p 2s 6d");
 
         MockHttpServletResponse response = mockMvc.perform(
-                        post("/sum")
+                        post("/api/calculations/sum")
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .content(twoOperandsBodyJacksonTester.write(twoOperandsBody).getJson()))
                 .andReturn().getResponse();
@@ -90,7 +90,7 @@ public class CalculatorControllerTest {
         given(mapper.toString(eq(result))).willReturn("2p 12s 10d");
 
         MockHttpServletResponse response = mockMvc.perform(
-                        post("/subtract")
+                        post("/api/calculations/subtract")
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .content(twoOperandsBodyJacksonTester.write(twoOperandsBody).getJson()))
                 .andReturn().getResponse();
@@ -117,7 +117,7 @@ public class CalculatorControllerTest {
         given(mapper.toString(eq(result))).willReturn("11p 15s 4d");
 
         MockHttpServletResponse response = mockMvc.perform(
-                        post("/multiply")
+                        post("/api/calculations/multiply")
                                 .queryParam("i", "" + i)
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .content(baseDtoJacksonTester.write(body).getJson()))
@@ -145,7 +145,7 @@ public class CalculatorControllerTest {
         given(mapper.toString(eq(result), eq(reminder))).willReturn("1p 19s 2d (2p)");
 
         MockHttpServletResponse response = mockMvc.perform(
-                        post("/divide")
+                        post("/api/calculations/divide")
                                 .queryParam("i", "" + i)
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .content(baseDtoJacksonTester.write(body).getJson()))
@@ -163,7 +163,7 @@ public class CalculatorControllerTest {
         twoOperandsBody.setSecond("3p4s 10d");
 
         MockHttpServletResponse response = mockMvc.perform(
-                        post("/sum")
+                        post("/api/calculations/sum")
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .content(twoOperandsBodyJacksonTester.write(twoOperandsBody).getJson()))
                 .andReturn().getResponse();
@@ -178,7 +178,7 @@ public class CalculatorControllerTest {
         twoOperandsBody.setSecond("3p4s 10d");
 
         MockHttpServletResponse response = mockMvc.perform(
-                        post("/subtract")
+                        post("/api/calculations/subtract")
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .content(twoOperandsBodyJacksonTester.write(twoOperandsBody).getJson()))
                 .andReturn().getResponse();
@@ -195,7 +195,7 @@ public class CalculatorControllerTest {
         int i = -2;
 
         MockHttpServletResponse response = mockMvc.perform(
-                        post("/multiply")
+                        post("/api/calculations/multiply")
                                 .queryParam("i", "" + i)
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .content(baseDtoJacksonTester.write(body).getJson()))
@@ -212,7 +212,7 @@ public class CalculatorControllerTest {
         int i = -2;
 
         MockHttpServletResponse response = mockMvc.perform(
-                        post("/divide")
+                        post("/api/calculations/divide")
                                 .queryParam("i", "" + i)
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .content(baseDtoJacksonTester.write(body).getJson()))

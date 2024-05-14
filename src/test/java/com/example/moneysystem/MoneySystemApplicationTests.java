@@ -56,7 +56,7 @@ class MoneySystemApplicationTests {
 
 		HttpEntity<String> entity = new HttpEntity<String>(jacksonObjectMapper.writeValueAsString(twoOperandsBody), headers);
 
-		ResponseEntity<String> response = restTemplate.exchange(createURLWithPort("/sum"), HttpMethod.POST, entity,
+		ResponseEntity<String> response = restTemplate.exchange(createURLWithPort("/api/calculations/sum"), HttpMethod.POST, entity,
 				String.class);
 
 		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
@@ -74,7 +74,7 @@ class MoneySystemApplicationTests {
 
 		HttpEntity<String> entity = new HttpEntity<String>(jacksonObjectMapper.writeValueAsString(twoOperandsBody), headers);
 
-		ResponseEntity<String> response = restTemplate.exchange(createURLWithPort("/subtract"), HttpMethod.POST, entity,
+		ResponseEntity<String> response = restTemplate.exchange(createURLWithPort("/api/calculations/subtract"), HttpMethod.POST, entity,
 				String.class);
 
 		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
@@ -91,7 +91,7 @@ class MoneySystemApplicationTests {
 			setData("11p 15s 4d");
 		}};
 
-		String urlTemplate = UriComponentsBuilder.fromHttpUrl(createURLWithPort("/multiply"))
+		String urlTemplate = UriComponentsBuilder.fromHttpUrl(createURLWithPort("/api/calculations/multiply"))
 				.queryParam("i", "{i}")
 				.encode()
 				.toUriString();
@@ -116,7 +116,7 @@ class MoneySystemApplicationTests {
 			setData("1p 19s 2d (2d)");
 		}};
 
-		String urlTemplate = UriComponentsBuilder.fromHttpUrl(createURLWithPort("/divide"))
+		String urlTemplate = UriComponentsBuilder.fromHttpUrl(createURLWithPort("/api/calculations/divide"))
 				.queryParam("i", "{i}")
 				.encode()
 				.toUriString();
@@ -139,7 +139,7 @@ class MoneySystemApplicationTests {
 
 		HttpEntity<String> entity = new HttpEntity<String>(jacksonObjectMapper.writeValueAsString(twoOperandsBody), headers);
 
-		ResponseEntity<String> response = restTemplate.exchange(createURLWithPort("/sum"), HttpMethod.POST, entity,
+		ResponseEntity<String> response = restTemplate.exchange(createURLWithPort("/api/calculations/sum"), HttpMethod.POST, entity,
 				String.class);
 
 		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
@@ -153,7 +153,7 @@ class MoneySystemApplicationTests {
 
 		HttpEntity<String> entity = new HttpEntity<String>(jacksonObjectMapper.writeValueAsString(twoOperandsBody), headers);
 
-		ResponseEntity<String> response = restTemplate.exchange(createURLWithPort("/subtract"), HttpMethod.POST, entity,
+		ResponseEntity<String> response = restTemplate.exchange(createURLWithPort("/api/calculations/subtract"), HttpMethod.POST, entity,
 				String.class);
 
 		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
@@ -166,7 +166,7 @@ class MoneySystemApplicationTests {
 		}};
 		int i = -2;
 
-		String urlTemplate = UriComponentsBuilder.fromHttpUrl(createURLWithPort("/multiply"))
+		String urlTemplate = UriComponentsBuilder.fromHttpUrl(createURLWithPort("/api/calculations/multiply"))
 				.queryParam("i", "{i}")
 				.encode()
 				.toUriString();
@@ -187,7 +187,7 @@ class MoneySystemApplicationTests {
 		}};
 		int i = 3;
 
-		String urlTemplate = UriComponentsBuilder.fromHttpUrl(createURLWithPort("/divide"))
+		String urlTemplate = UriComponentsBuilder.fromHttpUrl(createURLWithPort("/api/calculations/divide"))
 				.queryParam("i", "{i}")
 				.encode()
 				.toUriString();
@@ -208,7 +208,7 @@ class MoneySystemApplicationTests {
 		}};
 		int i = 3;
 
-		String urlTemplate = UriComponentsBuilder.fromHttpUrl(createURLWithPort("/divide"))
+		String urlTemplate = UriComponentsBuilder.fromHttpUrl(createURLWithPort("/api/calculations/divide"))
 				.queryParam("i", "{i}")
 				.encode()
 				.toUriString();
