@@ -50,7 +50,7 @@ public class CalculatorController {
     public BaseDto sumV1(@RequestBody @Valid TwoOperandsBody body) {
         SterlingCurrency first = mapper.toSterlingCurrency(body.getData());
         SterlingCurrency second = mapper.toSterlingCurrency(body.getSecond());
-        logger.info("summing first : " + mapper.toString(first) + " second: " + mapper.toString(second));
+        logger.info("summing first : " + body.getData() + " second: " + body.getSecond());
         SterlingCurrency result = calculatorService.sum(first, second);
         String resultString = mapper.toString(result);
         logger.info("result " + resultString);
@@ -75,7 +75,7 @@ public class CalculatorController {
     public BaseDto subtractV1(@RequestBody @Valid TwoOperandsBody body) {
         SterlingCurrency first = mapper.toSterlingCurrency(body.getData());
         SterlingCurrency second = mapper.toSterlingCurrency(body.getSecond());
-        logger.info("subtracting first : " + mapper.toString(first) + " second: " + mapper.toString(second));
+        logger.info("subtracting first : " + body.getData() + " second: " + body.getSecond());
         SterlingCurrency result = calculatorService.subtract(first, second);
         String resultString = mapper.toString(result);
         logger.info("result " + resultString);
@@ -103,7 +103,7 @@ public class CalculatorController {
                            @Min(value = 0, message = "i must be greater than or equals to 0")
                            int i) {
         SterlingCurrency toMultiply = mapper.toSterlingCurrency(body.getData());
-        logger.info("multiplying : " + mapper.toString(toMultiply) + " by: " + i);
+        logger.info("multiplying : " + body.getData() + " by: " + i);
         SterlingCurrency result = calculatorService.multiply(toMultiply, i);
         String resultString = mapper.toString(result);
         logger.info("result " + resultString);
@@ -131,7 +131,7 @@ public class CalculatorController {
                          @Min(value = 1, message = "i must be greater than or equals to 1")
                          int i) {
         SterlingCurrency toDivide = mapper.toSterlingCurrency(body.getData());
-        logger.info("dividing : " + mapper.toString(toDivide) + " by: " + i);
+        logger.info("dividing : " + body.getData() + " by: " + i);
         SterlingCurrency[] result = calculatorService.divide(toDivide, i);
         String resultString = mapper.toString(result[0], result[1]);
         logger.info("result " + resultString);
