@@ -1,5 +1,6 @@
 package com.example.moneysystem.controller;
 
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,6 +14,8 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.context.request.RequestAttributes;
+import org.springframework.web.context.request.ServletWebRequest;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.method.annotation.HandlerMethodValidationException;
 
@@ -51,6 +54,9 @@ public class ExceptionControllerAdvice {
     @ExceptionHandler(HttpMediaTypeNotAcceptableException.class)
     public Map<String, Object> handleMediaTypeNotAcceptableException(HttpMediaTypeNotAcceptableException ex, WebRequest request) {
         DefaultErrorAttributes error = new DefaultErrorAttributes();
+        request.setAttribute(RequestDispatcher.ERROR_STATUS_CODE, HttpStatus.BAD_REQUEST.value(), RequestAttributes.SCOPE_REQUEST);
+        // Here we add request URI and this could be a bit tricky
+        request.setAttribute(RequestDispatcher.ERROR_STATUS_CODE, ((ServletWebRequest)request).getRequest().getRequestURI(), RequestAttributes.SCOPE_REQUEST);
         return error.getErrorAttributes(request, ErrorAttributeOptions.defaults());
     }
 
@@ -63,6 +69,9 @@ public class ExceptionControllerAdvice {
     public Map<String, Object> handleException(Exception ex, WebRequest request) {
         logger.error("Exception: ", ex);
         DefaultErrorAttributes error = new DefaultErrorAttributes();
+        request.setAttribute(RequestDispatcher.ERROR_STATUS_CODE, HttpStatus.INTERNAL_SERVER_ERROR.value(), RequestAttributes.SCOPE_REQUEST);
+        // Here we add request URI and this could be a bit tricky
+        request.setAttribute(RequestDispatcher.ERROR_STATUS_CODE, ((ServletWebRequest)request).getRequest().getRequestURI(), RequestAttributes.SCOPE_REQUEST);
         return error.getErrorAttributes(request, ErrorAttributeOptions.defaults());
     }
 

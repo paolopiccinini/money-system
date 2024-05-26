@@ -4,10 +4,14 @@ import com.example.moneysystem.constants.Constants;
 import com.example.moneysystem.filter.HeaderFilter;
 import com.example.moneysystem.interceptor.Slf4jMDCInterceptor;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
+import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.Operation;
 import io.swagger.v3.oas.models.info.Contact;
 import io.swagger.v3.oas.models.info.Info;
+import io.swagger.v3.oas.models.media.IntegerSchema;
+import io.swagger.v3.oas.models.media.ObjectSchema;
+import io.swagger.v3.oas.models.media.Schema;
 import io.swagger.v3.oas.models.media.StringSchema;
 import io.swagger.v3.oas.models.parameters.HeaderParameter;
 import io.swagger.v3.oas.models.parameters.Parameter;
@@ -25,6 +29,7 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.util.List;
+import java.util.Map;
 
 @Configuration
 @ConfigurationProperties(prefix = "config.moneysystem")
@@ -52,13 +57,19 @@ public class MoneySystemConfiguration implements WebMvcConfigurer {
         contact.setEmail("paolo.piccinini88@gmail.com");
         contact.setName("Paolo Piccinini");
 
+
         Info info = new Info()
                 .title("UK money system before 1970 calculation API")
-                .version("1.0")
+                .version("1.0.0")
                 .contact(contact)
                 .description("This API exposes endpoints to do calculations with UK money system before 1970.");
 
-        return new OpenAPI().info(info).servers(List.of(devServer));
+        return new OpenAPI()
+                .components(new Components()
+                        .addSchemas("Map", new Schema<Map<String, Object>>().addProperty("status", new IntegerSchema().example(404)))
+                )
+                .info(info)
+                .servers(List.of(devServer));
     }
 
     // Tryied to override Accept header NOT WORKING
