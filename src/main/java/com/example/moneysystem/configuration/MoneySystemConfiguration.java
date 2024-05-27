@@ -1,8 +1,11 @@
 package com.example.moneysystem.configuration;
 
 import com.example.moneysystem.constants.Constants;
+import com.example.moneysystem.filter.ContentTraceFilter;
 import com.example.moneysystem.filter.HeaderFilter;
 import com.example.moneysystem.interceptor.Slf4jMDCInterceptor;
+import com.example.moneysystem.service.ContentTraceManager;
+import com.example.moneysystem.service.CustomHttpTraceRepository;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
@@ -21,6 +24,7 @@ import org.springdoc.core.models.GroupedOpenApi;
 import org.springframework.boot.actuate.web.exchanges.HttpExchangeRepository;
 import org.springframework.boot.actuate.web.exchanges.InMemoryHttpExchangeRepository;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.filter.CommonsRequestLoggingFilter;
@@ -35,6 +39,21 @@ import java.util.Map;
 @ConfigurationProperties(prefix = "config.moneysystem")
 public class MoneySystemConfiguration implements WebMvcConfigurer {
     private String slf4MDCHeader;
+
+    private final ContentTraceFilter contentTraceFilter;
+
+    public MoneySystemConfiguration(ContentTraceFilter contentTraceFilter,ContentTraceManager contentTraceManager) {
+        this.contentTraceFilter = contentTraceFilter;
+    }
+
+    @Bean
+    public FilterRegistrationBean<ContentTraceFilter> servletRegistrationBean() {
+        final FilterRegistrationBean<ContentTraceFilter> registrationBean = new FilterRegistrationBean<>();
+        registrationBean.setFilter(contentTraceFilter);
+        registrationBean.addUrlPatterns("/api/*");
+        registrationBean.setOrder(1);
+        return registrationBean;
+    }
 
     // NOT USED register filter
 //    @Bean
@@ -96,10 +115,10 @@ public class MoneySystemConfiguration implements WebMvcConfigurer {
 //    }
 
     // to expose /actuator/httpExchange
-    @Bean
-    public HttpExchangeRepository httpExchangeRepository() {
-        return new InMemoryHttpExchangeRepository();
-    }
+//    @Bean
+//    public HttpExchangeRepository httpExchangeRepository() {
+//        return new CustomHttpTraceRepository(contentTraceManager);
+//    }
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
